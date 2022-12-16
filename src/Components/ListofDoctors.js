@@ -7,6 +7,7 @@ import {
   Image,
 } from "react-native";
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 
 const DATA = [
   {
@@ -74,6 +75,10 @@ export default function ListofDoctors() {
       location={item.location}
     />
   );
+  const navigation = useNavigation();
+  const MakeCall = () => {
+    navigation.navigate("Call");
+  };
   return (
     <View style={styles.Categories}>
       <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
@@ -82,14 +87,16 @@ export default function ListofDoctors() {
           <Text style={styles.CategoriesTitle}>See All</Text>
         </Pressable>
       </View>
-      <View style={{ height: "100%" }}>
-        <FlatList
+      <Pressable onPress={MakeCall}>
+      <FlatList
           style={{ padding: 1 }}
           data={DATA}
           renderItem={renderItem}
           keyExtractor={(item) => item.id}
         />
-      </View>
+      </Pressable>
+       
+      
     </View>
   );
 }
